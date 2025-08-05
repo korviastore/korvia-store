@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Korvia | Moda & Dijital Tasarım</title>
+  <style>
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom, #f3f3f3, #eaeaea);
+      color: #1a1a1a;
+      line-height: 1.6;
+    }
+
+    .logo-container {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+      z-index: 1000;
+      transition: opacity 0.4s ease;
+    }
+
+    .logo {
+      position: relative;
+      width: 60px;
+      height: 60px;
+    }
+
+    .logo span {
+      position: absolute;
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 60px;
+    }
+
+    .logo .k {
+      color: white;
+      z-index: 1;
+    }
+
+    .logo .v {
+      color: orange;
+      left: 10px;
+      z-index: 2;
+    }
+
+    .logo-hover {
+      position: absolute;
+      left: 60px;
+      top: 50%;
+      transform: translateY(-50%) translateX(0);
+      font-size: 24px;
+      color: white;
+      white-space: nowrap;
+      opacity: 0;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .logo-container:hover .logo-hover {
+      transform: translateY(-50%) translateX(15px);
+      opacity: 1;
+    }
+
+    header {
+      background: linear-gradient(to right, #000000, #434343);
+      color: white;
+      padding: 80px 20px 60px 100px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 4rem;
+      letter-spacing: 4px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    header p {
+      margin-top: 20px;
+      font-size: 1.2rem;
+      color: #ccc;
+      animation: fadeInDown 1.2s ease-out;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #222;
+      padding: 15px 0;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    nav a {
+      color: #fff;
+      margin: 0 20px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: orange;
+    }
+
+    section {
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 40px;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: orange;
+      display: block;
+      margin: 10px auto 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s ease;
+    }
+
+    .card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+      cursor: pointer;
+    }
+
+    .card-content {
+      display: none;
+      color: #555;
+    }
+
+    .card.active .card-content {
+      display: block;
+    }
+
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    .contact-form button {
+      padding: 15px 30px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .contact-form button:hover {
+      background: orange;
+    }
+
+    footer {
+      text-align: center;
+      background: #222;
+      color: #aaa;
+      padding: 40px 20px;
+      font-size: 0.9rem;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+<div class="logo-container" id="logo">
+  <div class="logo">
+    <span class="k">K</span>
+    <span class="v">V</span>
+  </div>
+  <div class="logo-hover">KORVIA</div>
+</div>
+
+<header>
+  <h1>KORVIA</h1>
+  <p>Moda Ürünleri ve Dijital Tasarımın Buluşma Noktası</p>
+</header>
+
+<nav>
+  <a href="#hakkimizda">Hakkımızda</a>
+  <a href="#hizmetler">Hizmetler</a>
+  <a href="#galeri">Galeri</a>
+  <a href="#iletisim">İletişim</a>
+</nav>
+
+<section id="hakkimizda">
+  <h2 class="section-title">Hakkımızda</h2>
+  <div class="fade">
+    <p>
+      Korvia, moda ve dijital sanat dünyasını bir araya getiren yenilikçi bir markadır. 
+      Özgün tasarımlarımızla sadece giyimi değil, aynı zamanda dijital estetiği de önemseyenler için buradayız.
+      Her bir ürünümüzde kalite, stil ve yaratıcı vizyonumuzu yansıtıyoruz.
+    </p>
+  </div>
+</section>
+
+<section id="hizmetler">
+  <h2 class="section-title">Hizmetlerimiz</h2>
+  <div class="grid">
+    <div class="card"><h3>Moda Ürünleri</h3><div class="card-content"><p>Ayakkabı, kıyafet ve takı koleksiyonlarımızla tarzınızı yansıtın.</p></div></div>
+    <div class="card"><h3>Dijital Çizim</h3><div class="card-content"><p>Markanıza özel illüstrasyonlar ve dijital grafik tasarımları.</p></div></div>
+    <div class="card"><h3>3D Tasarım</h3><div class="card-content"><p>Profesyonel ürün modelleme, animasyon ve VR/AR çözümleri.</p></div></div>
+  </div>
+</section>
+
+<section id="galeri" style="background:#f0f0f0;">
+  <h2 class="section-title">Ürün Galerisi</h2>
+  <div class="grid">
+    <div class="card"><h3>Gömlek</h3><div class="card-content"><p>Şıklığın simgesi sade ve rahat gömlek modelleri.</p></div></div>
+    <div class="card"><h3>Saat</h3><div class="card-content"><p>Zamana stil katan modern saat koleksiyonları.</p></div></div>
+    <div class="card"><h3>Ayakkabı</h3><div class="card-content"><p>Konfor ve tarzı bir araya getiren ayakkabılar.</p></div></div>
+  </div>
+</section>
+
+<section id="iletisim">
+  <h2 class="section-title">İletişim</h2>
+  <form class="contact-form fade">
+    <input type="text" placeholder="Adınız" required />
+    <input type="email" placeholder="E-posta" required />
+    <textarea rows="5" placeholder="Mesajınız" required></textarea>
+    <button type="submit">Gönder</button>
+  </form>
+</section>
+
+<footer>
+  &copy; 2025 Korvia. Tüm Hakları Saklıdır.
+</footer>
+
+<script>
+  const cards = document.querySelectorAll('.card h3');
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      const parent = card.parentElement;
+      parent.classList.toggle('active');
+    });
+  });
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade, .card').forEach(el => observer.observe(el));
+
+  // Logo scroll görünürlüğü
+  const logo = document.getElementById('logo');
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    logo.style.opacity = currentScroll < 100 ? '1' : '0';
+  });
+</script>
+
+</body>
+</html>
